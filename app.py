@@ -13,13 +13,13 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from utils.optimization import (
+from optimization import (
     clean_price_data, compute_simple_returns, annualized_mean, annualized_cov,
     efficient_frontier, max_sharpe_portfolio, equal_weight_portfolio,
     portfolio_beta_alpha, portfolio_return, portfolio_vol,
 )
-from utils.metrics import compute_metrics, drawdown_series, cumulative_returns
-from utils.glossary import GLOSSARY
+from metrics import compute_metrics, drawdown_series, cumulative_returns
+from glossary import GLOSSARY
 
 st.set_page_config(page_title="Portfolio Optimizer", page_icon="📈", layout="wide")
 
@@ -38,7 +38,7 @@ use_sample = st.sidebar.checkbox("Use bundled sample data (Sensex + 13 stocks)",
 if uploaded is not None and not use_sample:
     raw_df = pd.read_csv(uploaded)
 else:
-    raw_df = pd.read_csv("data/sample_data.csv")
+    raw_df = pd.read_csv("sample_data.csv")
 
 date_col = st.sidebar.selectbox(
     "Date column", options=list(raw_df.columns),
